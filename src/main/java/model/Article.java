@@ -20,26 +20,22 @@ public class Article implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name")
-	private String name;
-
-	@Column(name = "quantity")
-	private double quantity;
-
 	@Column(name = "denomination")
 	private String denomination;
+
+	@Column(name = "quantity")
+	private int quantity;
 
 	@Column(name = "price")
 	private int price;
 
-
 	public Article() {
 	}
 
-	public Article(String name, double quantity, String denomination, int price) {
-		this.name = name;
-		this.quantity = quantity;
+
+	public Article(String denomination, int quantity, int price) {
 		this.denomination = denomination;
+		this.quantity = quantity;
 		this.price = price;
 	}
 
@@ -51,28 +47,20 @@ public class Article implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(double quantity) {
-		this.quantity = quantity;
-	}
-
 	public String getDenomination() {
 		return denomination;
 	}
 
 	public void setDenomination(String denomination) {
 		this.denomination = denomination;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public int getPrice() {

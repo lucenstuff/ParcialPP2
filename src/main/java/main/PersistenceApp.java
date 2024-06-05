@@ -3,7 +3,6 @@ package main;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import model.Client;
 
 public class PersistenceApp {
 
@@ -14,9 +13,9 @@ public class PersistenceApp {
 		try {
 			em.getTransaction().begin();
 
-			Client client = new Client("John", "Doe", 45819248);
-
-			em.persist(client);
+//			Client client = new Client("John", "Doe", 45819248);
+//
+//			em.persist(client);
 
 			em.flush();
 

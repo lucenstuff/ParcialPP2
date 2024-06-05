@@ -27,6 +27,7 @@ public class Client implements Serializable {
 	@Column(name = "dni", unique = true)
 	private int dni;
 
+
 	public Client() {
 	}
 
