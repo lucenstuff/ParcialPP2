@@ -1,14 +1,20 @@
 package model;
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "clients")
@@ -27,6 +33,12 @@ public class Client implements Serializable {
 	@Column(name = "dni", unique = true)
 	private int dni;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_adress")
+	private Adress adress;
+
+	@OneToMany(mappedBy = "client")
+	private List<Bill> bills = new ArrayList<Bill>();
 
 	public Client() {
 	}
@@ -35,6 +47,21 @@ public class Client implements Serializable {
 		this.name = name;
 		this.lastName = lastName;
 		this.dni = dni;
+	}
+
+	public Client(String name, String lastName, int dni, Adress adress) {
+		this.name = name;
+		this.lastName = lastName;
+		this.dni = dni;
+		this.adress = adress;
+	}
+
+	public Adress getAdress() {
+		return adress;
+	}
+
+	public void setAdress(Adress adress) {
+		this.adress = adress;
 	}
 
 	public Long getId() {

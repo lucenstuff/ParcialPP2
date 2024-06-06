@@ -1,10 +1,13 @@
 package model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
@@ -30,13 +33,38 @@ public class BillDetail implements Serializable {
 	@Column(name = "subtotal")
 	private int subtotal;
 
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "fk_bill")
+	private Bill bill;
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "fk_article")
+	private Article article;
+
 	public BillDetail() {
 	}
 
-	public BillDetail(String denomination, int quantity, int subtotal) {
+	public BillDetail(String denomination, int quantity, int subtotal, Bill bill) {
 		this.denomination = denomination;
 		this.quantity = quantity;
 		this.subtotal = subtotal;
+		this.bill = bill;
+	}
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
+	public Bill getBill() {
+		return bill;
+	}
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
 	}
 
 	public Long getId() {

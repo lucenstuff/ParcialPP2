@@ -5,9 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -22,13 +25,22 @@ public class Category implements Serializable {
 
 	@Column(name = "denomination")
 	private String denomination;
-
+	@ManyToMany(mappedBy = "categories")
+	private List<Article> articles = new ArrayList<Article>();
 
 	public Category() {
 	}
 
 	public Category(String denomination) {
 		this.denomination = denomination;
+	}
+
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
 	}
 
 	public Long getId() {
